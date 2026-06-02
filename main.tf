@@ -211,6 +211,8 @@ resource "oci_core_instance_configuration" "this" {
   freeform_tags = var.freeform_tags
 
   lifecycle {
+    create_before_destroy = true
+
     precondition {
       condition     = !local.is_flexible_shape || var.shape_config != null
       error_message = "shape_config must be set when using a Flex shape."
